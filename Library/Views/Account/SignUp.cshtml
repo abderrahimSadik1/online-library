@@ -1,0 +1,95 @@
+﻿@using Library.ViewModel
+@model SignUpModel
+@{
+    ViewData["Title"] = "Sign UP";
+}
+
+<h2 class="text-center">Sign Up</h2>
+<section class="vh-150">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100 mt-100">
+            <div asp-validation-summary="All" class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 justify-content-center ">
+                <form asp-action="SignUp" method="post">
+
+                    <!-- UserName input -->
+                    <div class="form-outline mb-4">
+                        <label asp-for="UserName" class="form-label" for="form3Example1">UserName<span style="color: red;">*</span></label>
+                        <input asp-for="UserName" class="form-control form-control-lg"
+                               placeholder="Username" />
+                        <span asp-validation-for="UserName" style="color: red;"></span>
+                    </div>
+
+                    <!-- FirstName input -->
+                    <div class="form-outline mb-4">
+                        <label asp-for="FirstName" class="form-label" for="form3Example2">Prénom<span style="color: red;">*</span></label>
+                        <input asp-for="FirstName" class="form-control form-control-lg"
+                               placeholder="Prénom" />
+                        <span asp-validation-for="FirstName" style="color: red;"></span>
+                    </div>
+
+                    <!-- LastName input -->
+                    <div class="form-outline mb-4">
+                        <label asp-for="LastName" class="form-label" for="form3Example3">Nom<span style="color: red;">*</span></label>
+                        <input asp-for="LastName" class="form-control form-control-lg"
+                               placeholder="Nom" />
+                        <span asp-validation-for="LastName" style="color: red;"></span>
+                    </div>
+
+                    <!-- DateOfBirth input -->
+                    <div class="form-outline mb-4">
+                        <label asp-for="DateOfBirth" class="form-label" for="form3Example4">Date de naissance<span style="color: red;">*</span></label>
+                        <input asp-for="DateOfBirth" type="date" class="form-control form-control-lg" />
+                        <span asp-validation-for="DateOfBirth" style="color: red;"></span>
+                    </div>
+
+                    <!-- Address input -->
+                    <div class="form-outline mb-4">
+                        <label asp-for="Address" class="form-label" for="form3Example5">Adresse</label>
+                        <input asp-for="Address" class="form-control form-control-lg"
+                               placeholder="Adresse" />
+                        <span asp-validation-for="Address" style="color: red;"></span>
+                    </div>
+
+                    <!-- PhoneNumber input -->
+                    <div class="form-outline mb-4">
+                        <label asp-for="PhoneNumber" class="form-label" for="form3Example6">Numéro de Telephone</label>
+                        <input asp-for="PhoneNumber" class="form-control form-control-lg"
+                               placeholder="06******"/>
+                        <span asp-validation-for="PhoneNumber" style="color: red;"></span>
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <label asp-for="Email" class="form-label" for="form3Example7">Email<span style="color: red;">*</span></label>
+                        <input asp-for="Email" class="form-control form-control-lg"
+                               placeholder="sad@abd.com" />
+                        <span asp-validation-for="Email" style="color: red;"></span>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-3">
+                        <label asp-for="Password" class="form-label" for="form3Example8">Mot de passe<span style="color: red;">*</span></label>
+                        <input asp-for="Password" type="password" class="form-control form-control-lg"
+                               placeholder="***********" />
+                        <span asp-validation-for="Password" style="color: red;"></span>
+                    </div>
+                    <!-- Confirm Password input -->
+                    <div class="form-outline mb-3">
+                        <label asp-for="ConfirmPassword" class="form-label" for="form3Example9">Confirmer Mot de passe<span style="color: red;">*</span></label>
+                        <input asp-for="ConfirmPassword" type="password" class="form-control form-control-lg"
+                               placeholder="***********" />
+                        <span asp-validation-for="ConfirmPassword" style="color: red;"></span>
+                    </div>
+                
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <input type="submit" class="btn btn-outline-success float right" value="sign up"
+                               style="padding-left: 2.5rem; padding-right: 2.5rem;">
+                        <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="index">Cancel</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

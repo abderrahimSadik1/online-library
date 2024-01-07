@@ -1,0 +1,118 @@
+﻿@using Biblio
+@model Document
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor _httpContext
+@{
+    ViewData["Title"] = "Details";
+}
+@if (@_httpContext.HttpContext.Session.GetString("UserId") != null){
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Portfolio Item Heading -->
+    <h1 class="my-4">
+        @Model.Title
+    </h1>
+
+    <!-- Portfolio Item Row -->
+    <div class="row">
+        @if (false)
+        {
+            <div class="col-md-8">
+                <img src="hi">
+            </div>
+        }
+        else
+        {
+            <div class="col-md-8">
+                    <img class="img-fluid" src="@Model.ImageUrl" alt="@Model.Title" style="width: 400px; height: 500px;">
+            </div>
+        }
+
+
+        <div class="col-md-4">
+            <h3 class="my-3">Details</h3>
+            <ul class="list-unstyled">
+
+                    <li><strong>Author:</strong> <a href="https://www.google.com/search?q=@Model.Author">@Model.Author</a> </li>
+                <li><strong>Publication Date:</strong> @Model.PublicationDate</li>
+                <li>
+                    <strong>Status:</strong>
+                    @if (Model.Availability.ToLower() == "yes")
+                    {
+                        <span class="badge badge-success" style="background-color: #28a745; color: #fff;">Available</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-danger" style="background-color: #dc3545; color: #fff;">Not Available</span>
+                    }
+                </li>
+                <li><strong>Price:</strong> @Model.Price DH</li>
+            </ul>
+
+            <div class="mt-3">
+                @if (Model.Availability.ToLower() == "yes")
+                {
+                    <!-- Inside the Details.cshtml view -->
+                    <div class="mt-3">
+                        <form method="post" asp-action="Reserve">
+                            <input type="hidden" name="documentId" value="@Model.DocumentID" />
+                            <div class="form-group">
+                                <label for="reservationDays">Number of Reservation Days:</label>
+                                <input type="number" class="form-control" id="reservationDays" name="reservationDays" required />
+                            </div>
+                            <button type="submit" class="btn btn-secondary mt-2">Reserve</button>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <!-- Placeholder for not available content -->
+                    <p>This item is currently not available.</p>
+                }
+            </div>
+        </div>
+
+    </div>
+    <!-- /.row -->
+    <div class="mt-3">
+        <h3 class="my-3">Description</h3>
+        <p>@Model.Description</p>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+
+</div>
+}
+
+<!-- /.container -->
+<!--
+<div class="container">
+    <h1 class="mt-4">Details</h1>
+
+    <div class="card">
+        <div class="card-header">
+            <h4>Book Information</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">
+                    Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-9">
+                    Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-sm-3">
+                    Html.DisplayNameFor(model => model.year)
+                </dt>
+                <dd class="col-sm-9">
+                    Html.DisplayFor(model => model.year)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+-->

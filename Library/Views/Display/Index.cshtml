@@ -1,0 +1,66 @@
+﻿<!-- Views/Books/Index.cshtml -->
+@using Biblio
+@model List<Document>
+@{
+    ViewData["Title"] = "Library";
+}
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor _httpContext
+@if (@_httpContext.HttpContext.Session.GetString("UserId") != null){
+<h2>@ViewData["Title"]</h2>
+
+<form method="get" action="@Url.Action("Index", "Display")" class="mb-3">
+    <div class="input-group">
+        <label for="filter" class="input-group-text">Filter:</label>
+        <input type="text" id="filter" name="filter" class="form-control" />
+
+        <!-- Add category filter dropdown with smaller size -->
+        <select class="form-select form-select-sm" id="categoryFilter" name="categoryFilter">
+            <option value="">All Categories</option>
+                <option value="Science">Science</option>
+                <option value="Self-Improvement">Self-Improvement</option>
+                <option value="For kids">For kids</option>
+                <option value="Literature & Fiction">Literature & Fiction</option>
+                <option value="Fantasy">Fantasy</option>
+            <!-- Add more categories as needed -->
+        </select>
+        <button type="submit" class="btn btn-primary">Apply Filter</button>
+    </div>
+</form>
+
+
+<div class="row row-cols-1 row-cols-md-5 g-4">
+    @foreach (var book in Model)
+    {
+        <div class="col">
+            <div class="card h-100" style="width: 200px;">
+                <a asp-controller="Display" asp-action="Details" asp-route-id="@book.DocumentID">
+                    <img src="@book.ImageUrl" class="card-img-top" alt="@book.Title" />
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">@book.Title</h5>
+                    <p class="card-text">Author: @book.Author</p>
+                    <!-- Add more details as needed -->
+                    @if (book.Availability.ToLower() == "yes")
+                    {
+                        <span class="badge badge-success" style="background-color: #28a745; color: #fff;">Available</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-danger" style="background-color: #dc3545; color: #fff;">Not Available</span>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+}
+else
+{
+    <div class="text-center">
+
+        <a href="@Url.Action("Login", "Account")" class="btn btn-primary btn-lg mr-3">Login</a>
+        <a href="@Url.Action("SignUp", "Account")" class="btn btn-secondary btn-lg">Sign Up</a>
+    </div>
+
+}
